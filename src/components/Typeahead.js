@@ -44,6 +44,7 @@ width: 600px;
 
 const Typeahead = ({suggestions, handleSelect }) => {
     const [value, setValue] = React.useState('');
+    const matchedSuggestions = suggestions.filter(({title}) => title.toLowerCase().includes(value.toLowerCase()))
 
   
     return (
@@ -63,23 +64,22 @@ const Typeahead = ({suggestions, handleSelect }) => {
   
         <Button onClick={() => setValue('')}>Clear</Button>
         </InputWrapper>
-        <SuggestionBox>
         {
-        suggestions
-        .filter(({title}) => title.toLowerCase().includes(value.toLowerCase()))
-        .map((suggestion) => {
+            (matchedSuggestions.length > 0 && value !== '') &&
+            <SuggestionBox>
+                {
+        matchedSuggestions.map((suggestion) => {
           return (
               <Suggestion
-            
-              key={suggestion.id}
-              onClick={() => handleSelect(suggestion.title)}
+            key={suggestion.id}
+            onClick={() => handleSelect(suggestion.title)}
             >
-              {suggestion.title}
+            {suggestion.title}
               </Suggestion>
-            
           );
         })}
       </SuggestionBox>
+}
       </Wrapper>
        
       </>
