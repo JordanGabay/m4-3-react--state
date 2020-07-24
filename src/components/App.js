@@ -1,5 +1,4 @@
 import React from 'react';
-
 import GlobalStyles from './GlobalStyles';
 import Typeahead from './Typeahead';
 import data from '../data';
@@ -14,6 +13,7 @@ const App = (props) => {
       {/* TODO */}
       <Wrapper>
         <Typeahead
+        categories={data.categories}
         suggestions={data.books}
         handleSelect={(suggestions) => {
           window.alert(suggestions);
